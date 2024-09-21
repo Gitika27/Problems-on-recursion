@@ -1,0 +1,51 @@
+package com.practiceProblems.java;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Stack;
+
+public class GenerateAllBinaryStrings {
+	
+	static int n = 3;
+	static List<String> ans;
+	
+	public static String toString(Stack<Integer> s) {
+		String binary = "";
+		for(Integer i : s) {
+			binary += String.valueOf(i);
+		}
+		return binary;
+	}
+	
+	public static void generate(Stack<Integer> s) {
+		
+		if(s.size() == n ) {
+			ans.add(toString(s));
+			return;
+		}
+		
+		s.push(0);
+		generate(s);
+		s.pop();
+		
+		if(s.isEmpty() || s.peek()!= 1) {
+			s.push(1);
+			generate(s);
+			s.pop();
+		}
+
+		
+	}
+
+	public static void main(String[] args) {
+		
+		Stack<Integer> s = new Stack<>();
+		ans = new ArrayList<>();
+		generate(s);
+		System.out.println(ans.toString());
+
+	}
+
+}
+
+Output: [000, 001, 010, 100, 101]
