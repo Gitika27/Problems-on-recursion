@@ -1,0 +1,53 @@
+package com.practiceProblems.java;
+
+import java.util.*;
+
+public class CombinationSum {
+	
+	static List<List<Integer>> ans ;
+	
+	public static ArrayList<Integer> stacktoList(Stack<Integer> s) {
+		ArrayList<Integer> a = new ArrayList<>();
+		
+		for(Integer i : s) {
+			a.add(i);
+		}
+		
+		return a;
+	}
+	
+	public static void combination(int[] arr, int sum, Stack<Integer> s, int i, int target, int n) {
+		
+		if(i > n || sum > target) {
+			return;
+		}
+		
+		if (sum == target) {
+			ans.add(stacktoList(s));
+		}
+
+		
+		while (sum < target && i < n) {
+			
+			s.push(arr[i]);
+			sum += arr[i];
+			combination(arr,sum,s,i,target,n);
+			s.pop();
+			sum -= arr[i];
+			i++;
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		
+		int[] arr = {2,3,5};
+		Stack<Integer> s = new Stack<>();
+		ans = new ArrayList<>();
+		combination(arr,0,s,0,8,arr.length);
+		System.out.println(ans.toString());
+	}
+
+}
+
+Output: [[2, 2, 2, 2], [2, 3, 3], [3, 5]]
