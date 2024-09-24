@@ -1,0 +1,48 @@
+package com.practiceProblems.java;
+
+import java.util.ArrayList;
+
+public class SubsetSum {
+	
+	static ArrayList<Integer> ans ;
+	
+	public static void subsets(ArrayList<Integer> arr, int ind, int n, int sum) {
+		
+		System.out.println("ind is "+ind+" sum is "+sum);
+		
+		if(ind > n)
+			return;
+		
+		
+
+	
+		if(ind < n) {
+			
+			sum += arr.get(ind);
+			ans.add(sum);
+			subsets(arr,ind+1,n,sum);
+			sum -= arr.get(ind);		
+		}
+
+		
+		subsets(arr,ind+1,n,sum);
+		
+		
+	}
+
+	public static void main(String[] args) {
+		
+		ArrayList<Integer> arr = new ArrayList<>(); //1, 2, 1
+		arr.add(1);
+		arr.add(2);
+		arr.add(1);
+		int n = arr.size();
+		ans =  new ArrayList<>();
+		ans.add(0);
+		subsets(arr,0,n,0);
+		System.out.println(ans.toString());
+		
+		
+	}
+
+}
