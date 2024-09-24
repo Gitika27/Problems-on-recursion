@@ -1,0 +1,45 @@
+
+
+// User function Template for Java//User function Template for Java
+class Solution {
+    
+    static ArrayList<Integer> ans ;
+	
+	public static void subsets(ArrayList<Integer> arr, int ind, int n, int sum) {
+		if(ind > n)
+			return;
+		
+		ans.add(sum);
+		
+		for(int i = ind; i<n;i++) {
+			sum += arr.get(i);
+			subsets(arr,i+1,n,sum);
+			sum -= arr.get(i);
+		}
+		
+		
+	}
+	
+    ArrayList<Integer> subsetSums(ArrayList<Integer> arr, int n) {
+        
+        ans =  new ArrayList<>();
+		subsets(arr,0,n,0);
+		return ans;
+    }
+
+
+	public static void main(String[] args) {
+		
+		ArrayList<Integer> arr = new ArrayList<>(); //1, 2, 1
+		arr.add(1);
+		arr.add(2);
+		arr.add(1);
+		int n = arr.size();
+		ans =  new ArrayList<>();
+		ans.add(0);
+		subsets(arr,0,n,0);
+		System.out.println(ans.toString());
+		
+		
+	}
+}
