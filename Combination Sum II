@@ -1,0 +1,86 @@
+package com.practiceProblems.java;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Stack;
+
+public class Combination_2 {
+	
+	static HashSet<List<Integer>> ans ;
+	
+	public static ArrayList<Integer> stacktoList(Stack<Integer> s) {
+		ArrayList<Integer> a = new ArrayList<>();
+		
+		for(Integer i : s) {
+			a.add(i);
+		}
+		
+		return a;
+	}
+	
+	public static void combination(int[] arr, int sum, Stack<Integer> s, int ind, int target, int n) {
+		
+		System.out.println(Arrays.toString(arr));
+		
+		if(ind >= n) {
+			return;
+		}
+		
+		if(sum > target) {
+			return;
+		}
+		
+		if (sum == target) {
+			 ans.add(new ArrayList<>(s));
+			return;
+		}
+
+		
+		
+		for(int i = ind; i<n; i++) {
+	
+			if(i > ind && arr[i]==arr[i-1]) continue;
+			
+			s.push(arr[i]);
+			sum += arr[i];
+
+			combination(arr,sum,s,i+1,target,n);
+			s.pop();  // when it returns here, what will be i, it will i or i+1
+			sum -= arr[i];
+		
+		}
+		
+	}
+
+	public static void main(String[] args) {
+		
+		//int[] arr = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+		int[] arr = {1,1,1,2,2};
+		int target = 4;
+		Stack<Integer> s = new Stack<>();
+		ans = new HashSet<>();
+		System.out.println("length is "+arr.length);
+		List<List<Integer>> result = new ArrayList<>();
+		Arrays.sort(arr);
+		combination(arr,0,s,0,target,arr.length);
+		
+		
+		for(List<Integer> i : ans) {
+			result.add(i);
+		}
+		
+		
+		for(int i = 9; i<10;i++) {
+			if(i > 9) {
+				System.out.println("gitika");
+			}
+		}
+		
+		System.out.println(result.toString());
+
+	}
+
+}
