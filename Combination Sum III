@@ -1,0 +1,58 @@
+package com.practiceProblems.java;
+
+import java.util.Arrays;
+import java.util.*;
+
+public class CombinationSum_3 {
+	
+	static List<List<Integer>> ans;
+	
+	public static void combination(int[] arr, Stack<Integer> s, int k, int n, int sum, int ind) {
+		
+		if ( sum == n && s.size() == k) {
+			ans.add(new ArrayList<>(s));
+			System.out.println(s.toString());
+		}
+		
+		
+		
+		if(arr[ind] > 9 || ind >= arr.length || sum > n || s.size() == k) {
+			return;
+		}
+		
+		if (sum < n){
+			
+			// pick the element
+			s.push(arr[ind]);
+			sum += arr[ind];
+			combination(arr,s,k,n,sum,ind+1);
+			s.pop();
+			sum -= arr[ind];
+		}
+		
+		// don't pick the element and move forward with next element
+		combination(arr,s,k,n,sum,ind+1);
+		
+		
+	}
+
+	public static void main(String[] args) {
+		
+		int k = 2;
+		int n = 18;
+		int len = 0;
+		ans = new ArrayList<>();
+		int[] arr = new int[n-1];
+		Stack<Integer> s = new Stack<>();
+		
+
+		for(int i = 1; i<=n-1; i++) {
+			arr[i-1] = i;
+		}
+		
+		System.out.println(Arrays.toString(arr));
+		combination(arr,s,k,n,0,0);
+
+	}
+
+}
